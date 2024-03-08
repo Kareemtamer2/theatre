@@ -1,5 +1,6 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
+#include "users.h"
 #include "welcomewindow.h"
 #include "registerwindow.h"
 
@@ -28,8 +29,20 @@ void loginwindow::on_register_but_clicked()
 
 void loginwindow::on_login_but_clicked()
 {
-    hide();
-    welcomewindow* welcomewindow= new class welcomewindow(this);
-    welcomewindow->show();
+    QString name=ui->name_line->text();
+    QString pass=ui->pass_line->text();
+    for (int i=0; i<usercout;i++)
+    {
+        if((pass==passwords[i])&&(name==usernames[i]))
+        {
+            hide();
+            welcomewindow* welcomewindow= new class welcomewindow(this, usernames[i],ages[i] );
+            welcomewindow->show();
+        }
+        else
+        {
+             ui->error_label->setVisible(true);
+        }
+    }
 }
 
